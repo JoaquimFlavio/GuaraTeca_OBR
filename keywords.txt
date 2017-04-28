@@ -1,0 +1,47 @@
+#######################################
+# Syntaxe de cores do GuaraTeca_OBR
+#######################################
+
+#######################################
+# Funções especiais (KEYWORD1)
+#######################################
+
+MRobot	KEYWORD1	MRobot
+HRobot	KEYWORD1	HRobot
+Sensor	KEYWORD1	Sensor
+Led	KEYWORD1	Led
+
+#######################################
+# Metodos e Funções (KEYWORD2)
+#######################################
+
+tras	            KEYWORD2
+frente	            KEYWORD2
+direita	            KEYWORD2
+esquerda	        KEYWORD2
+para	            KEYWORD2
+DefineVelocidade	KEYWORD2
+AdquiriVelocidade	KEYWORD2
+
+luz	            KEYWORD2
+cor	            KEYWORD2
+cor_frequencia	KEYWORD2
+cor_filtro	    KEYWORD2
+distancia	    KEYWORD2
+posicao	        KEYWORD2
+conducao	    KEYWORD2
+
+Liga	KEYWORD2
+Desliga	KEYWORD2
+
+###############################
+# Consantes e tipos (LITERAL1)
+###############################
+
+Ax	LITERAL1
+Ay	LITERAL1
+Az	LITERAL1
+Gx	LITERAL1
+Gy	LITERAL1
+Gz	LITERAL1
+temperatura	LITERAL1
