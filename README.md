@@ -5,7 +5,7 @@ A GuaraTeca é uma sub-biblioteca da biblioteca [Guarateca](https://github.com/J
 ## Instalação
 
 1. **Instalação**
-    - Primeiro baixe a biblioteca clicando [aqui](https://github.com/OtacilioN/Brasilino/archive/v1.0.0.zip)
+    - Primeiro baixe a biblioteca clicando [aqui](https://codeload.github.com/JoaquimFlavio/GuaraTeca_OBR/zip/1.2.0)
     - Abra a sua IDE do Arduino, clique em ```Sketch > Incluir Biblioteca > Adicionar biblioteca .ZIP```
     - Procure a biblioteca Brasilino baixada em arquivo .ZIP em sua pasta de downloads
     - Pronto, agora a sua biblioteca está instalada e pronta para ser utilizada!
