@@ -139,7 +139,7 @@ Led meuLed(3);
 
 > Este mesmo construtor pode ser utilizado por outros componentes que utilizem apenas um pino digital, como um buzzer, por exemplo.
 
-### liga([float ms])
+### `void liga([float ms])`
 
 O exemplo abaixo liga `meuLed` e aguarda 500 milissegundos.
 
@@ -153,7 +153,7 @@ meuLed.liga(500);
 meuLed.liga();
 ```
 
-### desliga([float ms])
+### `void desliga([float ms])`
 
 O exemplo abaixo desliga `meuLed` e aguarda 500 milissegundos.
 
