@@ -2,6 +2,15 @@
 
 A GuaraTeca é uma sub-biblioteca da biblioteca [Guarateca](https://github.com/JoaquimFlavio/GuaraTeca), focada na programação de robôs, baseadas em Arduino, para a participação na [Olimpiada Brasileira de Robotica - OBR](http://www.obr.org.br/). Reduzindo o tempo de produção e facilitando a compreenção do codigo e totalmente em português.
 
+Esta biblioteca presume o robô do usuário com a seguinte estrutura:
+
+- De 1 a 4 motores DC, através da PonteH ou MotorShield.
+- Sensores de refletância.
+- Sensores de cor.
+- Sensores ultrassônicos.
+- Sensores acelerômetros e giroscópios.
+- LEDs e demais atuadores simples.
+
 ## Instalação
 
 1. **Instalação**
@@ -9,8 +18,8 @@ A GuaraTeca é uma sub-biblioteca da biblioteca [Guarateca](https://github.com/J
     - Abra a sua IDE do Arduino, clique em ```Sketch > Incluir Biblioteca > Adicionar biblioteca .ZIP```
     - Procure a biblioteca GuaraTeca_OBR baixada em arquivo .ZIP em sua pasta de downloads
     - Pronto, agora a sua biblioteca está instalada e pronta para ser utilizada!
-    
-## Exemplo de uso
+
+## Uso
 
 ```c++
 #define funcao OBR
@@ -27,16 +36,6 @@ void loop() {
 }
 ```
 
-# GuaraTeca - OBR
-
-A Guarateca – OBR é a principal biblioteca da Guarateca, esta tem como objetivo facilitar o trabalho do programador de robôs para competições robóticas como a OBR (Olimpíada Brasileira de Robótica) e demais aplicações com robôs no formato de “carrinhos”, controlando-os de forma simples e facilitando o entendimento (em programação) de forma rápida. Esta biblioteca presume o robô do usuário com a seguinte estrutura:
-
-De 1 a 4 motores DC, através da PonteH ou MotorShield.
-Sensores de refletância.
-Sensores de cor.
-Sensores ultrassônicos.
-Sensores acelerômetros e giroscópios.
-LEDs e demais atuadores simples.
 Para utilizar a biblioteca, em plataforma Windows basta que definamos a função da Guarateca como “OBR”, através de uma constante “funcao”, no sketch presente no IDE do Arduino.
 
 ```cpp
