@@ -106,26 +106,27 @@ Este é o construtor da classe Sensor, que tem a função de realizar o controle
 
 O reconhecimento do tipo de sensor se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: Parâmetros vazios: sensor giroscópio. 
 
-- 1 pino: sensor de luz / refletância ou sensor de condução.
+- 1 pino: sensor de luz/refletância ou sensor de condução.
 - 2 pinos: sensor ultrassônico. 
 - 5 pinos: sensor de cor.
 
-### Leitura
 
 ```cpp
-"nomeObjeto"."tipoSensor"();
+Sensor sensorLuz(A0);
+Sensor sensorCor(1, 2, 3, 4, 5);
+Sensor sensorUltrassonico(A0);
+Sensor giroscopio();
+Sensor acelerometro();
 ```
 
-Este método da função Sensor tem como função a leitura dos sensores, basta colocar o nome do objeto e seguido de seu "tipo", podendo ser do tipo:
-
-### Sensores de Refletância
+### Sensores de Luz/Refletância
 
 #### `int luz()`
 
 O método `luz()` retorna um valor do tipo inteiro lido por um sensor de refltância.
 
 ```cpp
-meuSensorInfravermelho.luz();
+sensorLuz.luz();
 ```
 
 ### Sensores de Cor
@@ -135,7 +136,7 @@ meuSensorInfravermelho.luz();
 O método `cor()` retorna um valor do tipo inteiro lido por um sensor de cor/luminosidade.
 
 ```cpp
-meuSensorDeCor.cor();
+sensorCor.cor();
 ```
 
 ### Sensores Ultrassônicos
@@ -145,11 +146,18 @@ meuSensorDeCor.cor();
 O método `distancia()` retorna um valor do tipo real lido por um sensor ultrassônico, indicando a distância até um obstáculo em centímetros.
 
 ```cpp
-meuUltrassonico.distancia();
+sensorUltrassonico.distancia();
 ```
 
 ### Acelerômetros e Giroscópios
 
+```cpp
+acelerometro.acelerometroX();
+```
+
+```cpp
+giroscopio.giroscopioX();
+```
 
 Todos, com exceção do sensor de "posicao", dispensam o uso de parâmetros. Para utilizar este sensor é necessário informar o eixo do sensor a ser lido sendo representado pela letra inicial do sensor, A ou G, seguido de seu eixo x, y ou z, sendo assim:
 
