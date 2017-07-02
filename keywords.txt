@@ -20,19 +20,27 @@ frente	            KEYWORD2
 direita	            KEYWORD2
 esquerda	        KEYWORD2
 para	            KEYWORD2
-DefineVelocidade	KEYWORD2
-AdquiriVelocidade	KEYWORD2
+defineVelocidade	KEYWORD2
+adquireVelocidade	KEYWORD2
 
 luz	            KEYWORD2
 cor	            KEYWORD2
 cor_frequencia	KEYWORD2
 cor_filtro	    KEYWORD2
 distancia	    KEYWORD2
-posicao	        KEYWORD2
-conducao	    KEYWORD2
+acelerometroX	KEYWORD2
+acelerometroY	KEYWORD2
+acelerometroZ	KEYWORD2
+giroscopioX	    KEYWORD2
+giroscopioY	    KEYWORD2
+giroscopioZ	    KEYWORD2
+temperatura	    KEYWORD2
 
-Liga	KEYWORD2
-Desliga	KEYWORD2
+add_GiroscopioAcelerometro	    KEYWORD2
+inicia	    KEYWORD2
+
+liga	KEYWORD2
+desliga	KEYWORD2
 
 ###############################
 # Consantes e tipos (LITERAL1)
@@ -44,4 +52,6 @@ Az	LITERAL1
 Gx	LITERAL1
 Gy	LITERAL1
 Gz	LITERAL1
-temperatura	LITERAL1
+temp	LITERAL1
+Endereco_1	LITERAL1
+Endereco_2	LITERAL1
