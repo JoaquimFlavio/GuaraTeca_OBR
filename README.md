@@ -181,7 +181,9 @@ Todos, com exceção do sensor de "posicao", dispensam o uso de parâmetros. Par
 Led objeto(int pino);
 ```
 
-Para inicializar um LED (Light Emitting Diode | Diodo Emissor de Luz), utilize o construtor `Led "objeto"("int pino")`, onde `"objeto"` deve ser substituído pelo nome que você pretende dar ao sensor, e `"pino"` representa o número do pino digital ao qual o LED está ligado. Ex.:
+Para inicializar um LED (Light Emitting Diode | Diodo Emissor de Luz), utilize o construtor `Led "objeto"("int pino")`, onde `"objeto"` deve ser substituído pelo nome que você pretende dar ao sensor, e `"pino"` representa o número do pino digital ao qual o LED está ligado. 
+
+O exemplo a seguir inicializa um LED no pino digital 3:
 
 ```cpp
 Led meuLed(3);
