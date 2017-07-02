@@ -66,9 +66,9 @@ Caso utilize a plataforma Linux, o cabeçalho deverá seguir o seguinte modelo:
 #include <GuaraTeca.h>
 ```
 
-### Motores
+## Motores
 
-#### Declaração  
+Para inicializar um par de motores
 
 ```cpp
 MRobot "nomeObjeto"( "conexao1", "conexao2", "velocidade");
@@ -99,17 +99,24 @@ Por padrão para as classes "MRobot" e "HRobot" a movimentação de motores segu
 Esse método tem como função o controle de velocidade dos motores DC das Classes: "MRobot" e "HRobot". Os dois parâmetros são obrigatório.
 
 ## Sensores
+```cpp
+Sensor objeto.([uint8_t pino1, uint8_t pino2]);
+```
 
-Para inicializar um sensor, utilize o construtor `Sensor "nomeObjeto".("pino1", "pino2")`.
+Para inicializar um sensor, utilize o construtor `Sensor "objeto".(["pino1", "pino2"])`, onde `"objeto"` deve ser substituído pelo nome que você pretende dar ao sensor, e cada `"pino"` representa o número de um pino ao qual o seu sensor está ligado. Ex.:
 
-Este é o construtor da classe Sensor, que tem a função de realizar o controle de múltiplos sensores (de cor, refletância, ultrassônico, giroscópio e sistemas por eletro condução). 
+```cpp
+Sensor sensorLuz(A0);
+```
 
-O reconhecimento do tipo de sensor se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: Parâmetros vazios: sensor giroscópio. 
+A classe `Sensor` é capaz de controlar diversos tipos de sensores, como os de cor, luz/refletância, ultrassônico, giroscópio e acelerômetro. O reconhecimento do tipo de sensor a ser controlado se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: 
 
+- Parâmetros vazios: sensor giroscópio. 
 - 1 pino: sensor de luz/refletância ou sensor de condução.
 - 2 pinos: sensor ultrassônico. 
 - 5 pinos: sensor de cor.
 
+Para compreender melhor, observe o exemplo a seguir:
 
 ```cpp
 Sensor sensorLuz(A0);
@@ -169,9 +176,12 @@ Todos, com exceção do sensor de "posicao", dispensam o uso de parâmetros. Par
 - Gy = giroscópio eixo y.
 - Gz = giroscópio eixo z.
 
-## LED
+## LEDs
+```cpp
+Led objeto(int pino);
+```
 
-Para inicializar um LED (Light Emitting Diode | Diodo Emissor de Luz), utilize o construtor `Led "objeto"("int pino")`, onde `"pino"` representa o número do pino digital ao qual o LED está ligado. Ex.:
+Para inicializar um LED (Light Emitting Diode | Diodo Emissor de Luz), utilize o construtor `Led "objeto"("int pino")`, onde `"objeto"` deve ser substituído pelo nome que você pretende dar ao sensor, e `"pino"` representa o número do pino digital ao qual o LED está ligado. Ex.:
 
 ```cpp
 Led meuLed(3);
@@ -206,10 +216,6 @@ meuLed.desliga(500);
 ```cpp
 meuLed.desliga();
 ```
-
-## Aprendendo
-
-Na [documentação oficial da GuaraTeca](http://guarabots.wordpress.com/guarateca) você encontrará tudo o que precisa para dominar a biblioteca.
 
 ## Suporte
 
