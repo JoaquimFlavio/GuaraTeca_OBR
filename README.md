@@ -129,23 +129,31 @@ Gx = giroscópio eixo x.
 Gy = giroscópio eixo y.
 Gz = giroscópio eixo z.
 
-### LED
+## LED
 
-#### Declaração
-
-```cpp
-Led "nomeObjeto".("pino");
-```
-
-Este é o construtor da classe LED e tem como função básica ligar um LED (Light Emitting Diode | Diodo Emissor de Luz), podendo ser utilizado por outros componentes que tenham a necessidade de apenas um pino energizado por um sinal digital, a exemplo um buzzer.
-
-#### Uso
+Para inicializar um LED (Light Emitting Diode | Diodo Emissor de Luz), utilize o construtor `Led "objeto"("int pino")`, onde `"pino"` representa o número do pino digital ao qual o LED está ligado. Ex.:
 
 ```cpp
-"nomeObjeto"."estado"("tempo");
+Led meuLed(3);
 ```
 
-Aplica um estado de energia ao pino declarado por um determinado tempo em milésimos de segundos, tendo duas opções de estado: “liga” (para ativar a corrente) ou “desliga” (para desativar a corrente).
+> Este mesmo construtor pode ser utilizado por outros componentes que utilizem apenas um pino digital, como um buzzer, por exemplo.
+
+### liga([float ms])
+
+O exemplo abaixo liga `meuLed` e aguarda 500 milissegundos.
+
+```cpp
+meuLed.liga(500);
+```
+
+É possível utilizar esta mesma função sem um tempo de espera. Ex.:
+
+```cpp
+meuLed.liga();
+```
+
+### desliga(float milissegundos)
 
 ## Aprendendo
 
