@@ -13,13 +13,12 @@ Esta biblioteca presume o robô do usuário com a seguinte estrutura:
 
 ## Instalação
 
-1. **Instalação**
-    - Primeiro baixe a biblioteca clicando [aqui](https://codeload.github.com/JoaquimFlavio/GuaraTeca_OBR/zip/1.2.0)
-    - Abra a sua IDE do Arduino, clique em ```Sketch > Incluir Biblioteca > Adicionar biblioteca .ZIP```
-    - Procure a biblioteca GuaraTeca_OBR baixada em arquivo .ZIP em sua pasta de downloads
-    - Pronto, agora a sua biblioteca está instalada e pronta para ser utilizada!
+1. Primeiro baixe a biblioteca clicando [aqui](https://codeload.github.com/JoaquimFlavio/GuaraTeca_OBR/zip/1.2.0)
+2. Abra a sua IDE do Arduino, clique em ```Sketch > Incluir Biblioteca > Adicionar biblioteca .ZIP```
+3. Procure a biblioteca GuaraTeca_OBR baixada em arquivo .ZIP em sua pasta de downloads
+4. Pronto, agora a sua biblioteca está instalada e pronta para ser utilizada!
 
-## Uso
+## Utilização
 
 ```c++
 #define funcao OBR
@@ -67,9 +66,9 @@ Caso utilize a plataforma Linux, o cabeçalho deverá seguir o seguinte modelo:
 #include <GuaraTeca.h>
 ```
 
-## Motores
+### Motores
 
-### Declaração  
+#### Declaração  
 
 ```cpp
 MRobot "nomeObjeto"( "conexao1", "conexao2", "velocidade");
@@ -83,7 +82,7 @@ HRobot "nomeObjeto"("1A", "1B", "1V", "2A", "2B", "2V", velocidade);
 
 Este é o construtor de objetos da classe “HRobot” que tem como função o controle de motores DC com a utilização de PonteH dupla de qualquer fabricante. Essa classe permite o controle de 2 motores DC.  Os parâmetros a serem passados para a biblioteca são as 6 portas da PonteH dupla, sendo 4 de controle da direção dos motores e 2 de controle de velocidade, de tal modo que os 3 primeiros parâmetros correspondem a 1 dos lados da ponte H na respectiva ordem: pino de controle 1 e 2 do motor seguido do seu pino de velocidade, o mesmo vale para o outro lado, seu último parâmetro corresponde ao controle de velocidade medido de 0 à 100.
 
-### Movimentação
+#### Movimentação
 
 ```cpp
 "nomeObjeto"."direção"("tempo");
@@ -91,7 +90,7 @@ Este é o construtor de objetos da classe “HRobot” que tem como função o c
 
 Por padrão para as classes “MRobot” e “HRobot” a movimentação de motores segue o modelo acima. Sendo então o nome do objeto seguido de sua direção no ambiente: “frente”, “tras”, “esquerda”, “direita” ou “para”. Seu tempo de duração é definido em segundos, caso o tempo não seja informado ou seja igual a 0 ele iniciara a ação e a manterá em execução até que algo o interrompa.
 
-### Auxiliares
+#### Auxiliares
 
 ```cpp
 "nomeObjeto".DefineVelocidade("V1", "V2");
@@ -99,14 +98,14 @@ Por padrão para as classes “MRobot” e “HRobot” a movimentação de moto
 
 Esse método tem como função o controle de velocidade dos motores DC das Classes: “MRobot” e “HRobot”. Os dois parâmetros são obrigatório.
 
-## Sensores
+### Sensores
 
-### Declaração
+#### Declaração
 
 Sensor “nomeObjeto”.(“pino1”, “pino2”);
 Este é o construtor da classe Sensor, que tem a função de realizar o controle de múltiplos sensores (de cor, refletância, ultrassônico, giroscópio e sistemas por eletro condução). O reconhecimento do tipo de sensor se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: Parâmetros vazios: sensor giroscópio. 1 pino: sensor de luz / refletância ou sensor de condução. 2 pinos: sensor ultrassônico. 5 pinos: sensor de cor.
 
-### Leitura
+#### Leitura
 
 ```cpp
 "nomeObjeto"."tipoSensor"();
@@ -130,9 +129,9 @@ Gx = giroscópio eixo x.
 Gy = giroscópio eixo y.
 Gz = giroscópio eixo z.
 
-## LED
+### LED
 
-### Declaração
+#### Declaração
 
 ```cpp
 Led "nomeObjeto".("pino");
@@ -140,7 +139,7 @@ Led "nomeObjeto".("pino");
 
 Este é o construtor da classe LED e tem como função básica ligar um LED (Light Emitting Diode | Diodo Emissor de Luz), podendo ser utilizado por outros componentes que tenham a necessidade de apenas um pino energizado por um sinal digital, a exemplo um buzzer.
 
-### Uso
+#### Uso
 
 ```cpp
 "nomeObjeto"."estado"("tempo");
