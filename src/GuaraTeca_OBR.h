@@ -18,52 +18,120 @@
 #ifndef GuaraTeca_OBR_H
 #define GuaraTeca_OBR_H
 
-    #define Control_MotorShield                  Ativada
-    #define Control_PonteH                       Ativada
-    #define Control_SensorCor                    Ativada
-    #define Control_SensorGiroscopioAcelerometro Ativada
-    #define Control_SensorRefletancia            Ativada
-    #define Control_SensorUltrassonico           Ativada
-    #define Control_Servo                        Ativada
+    #define Control_MotorShield           Ativada
+    #define Control_PonteH                Ativada
+    #define Control_Sensor_HCSR04         Ativada
+    #define Control_Sensor_GY521_MPU6050  Ativada
+    #define Control_SensorRefletancia     Ativada
+    #define Control_Senso_TCS230          Ativada
+    #define Control_Servo                 Ativada
 
 #include <GuaraTeca_includes.h>
 
 //-------------------------------------------------------------------------------------
 class MRobot : public MotorShield{
     public:
-        MRobot(uint8_t conexao1, uint8_t conexao2, int velocidade);
-        
-        void frente     (float tempo = 0);
-        void tras       (float tempo = 0);
-        void esquerda   (float tempo = 0); 
-        void direita    (float tempo = 0);
-        void para       (float tempo = 0);
+        MRobot(uint8_t conexao1, uint8_t conexao2, int velocidade = 100);//Construtor da classe MRobot, para 2 motores.
+        MRobot(uint8_t conexao1, uint8_t conexao2, uint8_t conexao3, uint8_t conexao4, int velocidade = 100);//Construtor da classe MRobot, para 4 motores, os dois primeiro trabalharam em paralelo.
+        //Corespondencia de pinos: motor esquerdo, motor direito, velocidade(0~100).                                          
+        void frente     (float tempo = 0);//Metodo para mover o robo para frente   , durante "x" segundos.
+        void tras       (float tempo = 0);//Metodo para mover o robo para tras     , durante "x" segundos.
+        void esquerda   (float tempo = 0);//Metodo para mover o robo para esquerda , durante "x" segundos.
+        void direita    (float tempo = 0);//Metodo para mover o robo para direita  , durante "x" segundos.
+        void para       (float tempo = 0);//Metodo para travar movimentacao do robo, durante "x" segundos.
 
-        void DefineVelocidade   (int tempV1, int tempV2); //set
-        float AdquiriVelocidade (uint8_t OP);// get
-    protected:
-        float V1, V2;
-        uint8_t conexao1, conexao2, conexao3, conexao4;
+        void defineVelocidade   (int tempV1, int tempV2);//Metodo "set" de velocidade da classe.
+        int adquireVelocidade (uint8_t OP);//Metodo "get" de velocidade da classe.
+    private:
+        int V1, V2;//Atributos de velocidade da classe.
+        uint8_t conexao1, conexao2, conexao3, conexao4;//Atributos de conexoes da classe.
+        bool adicaoMotors;//atributo que controla a quantidade de motores: "2" ou "4".
 };
 
 class HRobot : public PonteH{
     public:
-        HRobot(uint8_t T1A, uint8_t T1B, uint8_t T1V, uint8_t T2A, uint8_t T2B, uint8_t T2V, unsigned char velocidade = 100);
-        
-        void frente     (float tempo = 0);
-        void tras       (float tempo = 0);
-        void esquerda   (float tempo = 0);
-        void direita    (float tempo = 0);
-        void para       (float tempo = 0);
+        HRobot(uint8_t P1A, uint8_t P2A, uint8_t VA, uint8_t P1B, uint8_t P2B, uint8_t VB, int velocidade = 100);//Construtor da classe HRobot.
+        //Corespondencia de pinos:
+            //P1A -> pino de controle 1 do lado A da PonteH.
+            //P2A -> pino de controle 2 do lado A da PonteH.
+            //VA  -> pino de controle de velocidade do lado A da PonteH.
+            //P1B -> pino de controle 1 do lado B da PonteH.
+            //P2B -> pino de controle 2 do lado B da PonteH.
+            //VB  -> pino de controle de velocidade do lado B da PonteH.
+            //velocidade -> 0~100.
+        void frente     (float tempo = 0);//Metodo para mover o robo para frente   , durante "x" segundos.
+        void tras       (float tempo = 0);//Metodo para mover o robo para tras     , durante "x" segundos.
+        void esquerda   (float tempo = 0);//Metodo para mover o robo para esquerda , durante "x" segundos.
+        void direita    (float tempo = 0);//Metodo para mover o robo para direita  , durante "x" segundos.
+        void para       (float tempo = 0);//Metodo para travar movimentacao do robo, durante "x" segundos.
 
-        void DefineVelocidade   (int tempV1, int tempV2);
-        float AdquiriVelocidade (uint8_t OP);
-    protected:
-        uint8_t motor[6];
-        unsigned char V1, V2;
+        void defineVelocidade   (int tempV1, int tempV2);//Metodo "set" de velocidade da classe.
+        int adquireVelocidade (uint8_t OP);//Metodo "get" de velocidade da classe.
+    private:
+        uint8_t motor[6];//Atributos de conexoes da classe.
+        int V1, V2;//Atributos de velocidade da classe.
 };
 
-void execute_durante(float tempo);
+void execute_durante(float tempo);//Funcao para converter o delay de milisegundos para segundos.
+
+#define Ax 0//Acelerometro eixo X.
+#define Ay 1//Acelerometro eixo Y.
+#define Az 2//Acelerometro eixo Z.
+
+#define Gx 4//Giroscopio eixo X.
+#define Gy 5//Giroscopio eixo Y.
+#define Gz 6//Giroscopio eixo Z.
+
+#define Tmp 3//Sensor de temperatura.
+
+#define Endereco_1 0x68//Endereco i2C do 1° sensor Giroscopio.
+#define Endereco_2 0x69//Endereco i2C do 2° sensor Giroscopio.
+
+#define frequenciaRecomendada_GUARABOTS 2//Melhor frequencia de operacao constatada.
+#define filtroCorRecomendada_GUARABOTS  'G'//Melhor filtro de cor constatada.
+
+class Sensor : public SensorRefletancia, public TCS230, public HCSR04, public GY521_MPU6050 {
+    public:
+        Sensor();//Construtor da classe Sensor, para sensor Giroscopio (GY521_MPU6050).
+        Sensor(uint8_t PinSense1);//Construtor da classe Sensor, para sensor de refletancia.
+        Sensor(uint8_t trigPin, uint8_t echoPin);//Construtor da classe Sensor, para sensor ultrassonico(HCSR04).
+        Sensor(uint8_t outPin, uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3);//Construtor da classe Sensor, para sensor de cor (TCS230).
+
+        void inicia(bool add = 0x00);//Metodo para iniciar o sensor Giroscopio.
+
+        int luz(void);//Metodo de leitura do sensor de refletancia.
+        int cor(void);//Metodo de leitura do sensor de cor.
+            void cor_frequencia(uint8_t OP);//Metodo para alterar a frequencia de operacao do sensor de cor.
+            void cor_filtro(char RGB);//Metodo para selecao de filtro de luz do sensor de cor.
+        float distancia(void);//Metodo de leitura do sensor ultrassonico.
+
+        int acelerometroX   ();//Metodo de leitura do sensor Acelerometro, eixo X.
+        int acelerometroY   ();//Metodo de leitura do sensor Acelerometro, eixo Y.
+        int acelerometroZ   ();//Metodo de leitura do sensor Acelerometro, eixo Z.
+        int giroscopioX     ();//Metodo de leitura do sensor Giroscopio, eixo X.
+        int giroscopioY     ();//Metodo de leitura do sensor Giroscopio, eixo Y.
+        int giroscopioZ     ();//Metodo de leitura do sensor Giroscopio, eixo Z.
+        int temperatura     ();//Metodo de leitura do sensor de temperatura.
+
+    private:
+        uint8_t PinSense1, PinSense2, PinSense3, PinSense4, PinSense5;//Atributos de conexao do sensores.
+        int dados[7];//Atributo de dados da leitura Giroscopio/Acelerometro.
+        bool DLC_sensor;
+};
+
+//-------------------------------------------------------------------------------------
+
+class Led{
+    public:
+        Led(uint8_t pin_adquiri);//Construtor da classe Lec.
+        void liga   (float temp = 0);//Metodo para ligar o led durante x milisegundos.
+        void desliga(float temp = 0);//Metodo para desligar o led durante x milisegundos.
+    private:
+        uint8_t pino;//Atributo de conexao do led.
+};
+
+#endif
+
 //-------------------------------------------------------------------------------------
 /*class Garra : public PonteH, public MotorShield{
     public:
@@ -88,46 +156,3 @@ void execute_durante(float tempo);
 };
 */
 //-------------------------------------------------------------------------------------
-
-#define Ax 1
-#define Ay 2
-#define Az 3
-
-#define Gx 4
-#define Gy 5
-#define Gz 6
-
-#define Temperatura 7
-
-class Sensor : public SensorRefletancia, public SensorCor, public SensorUltrassonico, public SensorGiroscopioAcelerometro{
-    public:
-        Sensor();
-        Sensor(uint8_t PinSense1);
-        Sensor(uint8_t PinSense1, uint8_t PinSense2);//Tp e Ep
-        Sensor(uint8_t PinSense1, uint8_t PinSense2, uint8_t PinSense3, uint8_t PinSense4, uint8_t PinSense5);//Out, S0, S1, S2, S3
-
-        int luz();
-        int cor();
-            void cor_frequencia(uint8_t OP);
-            void cor_filtro(uint8_t RGB);
-        float distancia();
-        float posicao(uint8_t OP);
-        int conducao();
-    protected:
-        void IniSensor_ag();//Acelerometro e giroscopio
-    private:
-        uint8_t PinSense1, PinSense2, PinSense3, PinSense4, PinSense5;
-        bool ini;
-};
-
-//-------------------------------------------------------------------------------------
-
-class Led{ // isso e uma classe
-    public:
-        Led(uint8_t pin_adquiri);// isso e um construtor de objetos
-        void liga(float temp = 0);// isso e um metodo
-        void desliga(float temp = 0);
-    private:
-        uint8_t pino;
-};
-#endif
