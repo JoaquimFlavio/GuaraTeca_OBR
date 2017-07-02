@@ -114,7 +114,7 @@ class Sensor : public SensorRefletancia, public TCS230, public HCSR04, public GY
         int temperatura     ();//Metodo de leitura do sensor de temperatura.
 
     private:
-        uint8_t PinSense1, PinSense2, PinSense3, PinSense4, PinSense5;//Atributos de conexao do sensores.
+        uint8_t PinSense1, PinSense2, PinSense3, PinSense4, PinSense5;//Atributos de conexao dos sensores.
         int dados[7];//Atributo de dados da leitura Giroscopio/Acelerometro.
         bool DLC_sensor;
 };

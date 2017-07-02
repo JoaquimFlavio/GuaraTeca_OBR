@@ -35,7 +35,7 @@ void loop() {
 }
 ```
 
-Para utilizar a biblioteca, em plataforma Windows basta que definamos a função da Guarateca como “OBR”, através de uma constante “funcao”, no sketch presente no IDE do Arduino.
+Para utilizar a biblioteca, em plataforma Windows basta que definamos a função da Guarateca como "OBR", através de uma constante "funcao", no sketch presente no IDE do Arduino.
 
 ```cpp
 #define funcao OBR
@@ -80,7 +80,7 @@ Este é o construtor de objetos da classe MRobot que tem como função o control
 HRobot "nomeObjeto"("1A", "1B", "1V", "2A", "2B", "2V", velocidade);
 ```
 
-Este é o construtor de objetos da classe “HRobot” que tem como função o controle de motores DC com a utilização de PonteH dupla de qualquer fabricante. Essa classe permite o controle de 2 motores DC.  Os parâmetros a serem passados para a biblioteca são as 6 portas da PonteH dupla, sendo 4 de controle da direção dos motores e 2 de controle de velocidade, de tal modo que os 3 primeiros parâmetros correspondem a 1 dos lados da ponte H na respectiva ordem: pino de controle 1 e 2 do motor seguido do seu pino de velocidade, o mesmo vale para o outro lado, seu último parâmetro corresponde ao controle de velocidade medido de 0 à 100.
+Este é o construtor de objetos da classe "HRobot" que tem como função o controle de motores DC com a utilização de PonteH dupla de qualquer fabricante. Essa classe permite o controle de 2 motores DC.  Os parâmetros a serem passados para a biblioteca são as 6 portas da PonteH dupla, sendo 4 de controle da direção dos motores e 2 de controle de velocidade, de tal modo que os 3 primeiros parâmetros correspondem a 1 dos lados da ponte H na respectiva ordem: pino de controle 1 e 2 do motor seguido do seu pino de velocidade, o mesmo vale para o outro lado, seu último parâmetro corresponde ao controle de velocidade medido de 0 à 100.
 
 #### Movimentação
 
@@ -88,7 +88,7 @@ Este é o construtor de objetos da classe “HRobot” que tem como função o c
 "nomeObjeto"."direção"("tempo");
 ```
 
-Por padrão para as classes “MRobot” e “HRobot” a movimentação de motores segue o modelo acima. Sendo então o nome do objeto seguido de sua direção no ambiente: “frente”, “tras”, “esquerda”, “direita” ou “para”. Seu tempo de duração é definido em segundos, caso o tempo não seja informado ou seja igual a 0 ele iniciara a ação e a manterá em execução até que algo o interrompa.
+Por padrão para as classes "MRobot" e "HRobot" a movimentação de motores segue o modelo acima. Sendo então o nome do objeto seguido de sua direção no ambiente: "frente", "tras", "esquerda", "direita" ou "para". Seu tempo de duração é definido em segundos, caso o tempo não seja informado ou seja igual a 0 ele iniciara a ação e a manterá em execução até que algo o interrompa.
 
 #### Auxiliares
 
@@ -96,38 +96,70 @@ Por padrão para as classes “MRobot” e “HRobot” a movimentação de moto
 "nomeObjeto".DefineVelocidade("V1", "V2");
 ```
 
-Esse método tem como função o controle de velocidade dos motores DC das Classes: “MRobot” e “HRobot”. Os dois parâmetros são obrigatório.
+Esse método tem como função o controle de velocidade dos motores DC das Classes: "MRobot" e "HRobot". Os dois parâmetros são obrigatório.
 
-### Sensores
+## Sensores
 
-#### Declaração
+Para inicializar um sensor, utilize o construtor `Sensor "nomeObjeto".("pino1", "pino2")`.
 
-Sensor “nomeObjeto”.(“pino1”, “pino2”);
-Este é o construtor da classe Sensor, que tem a função de realizar o controle de múltiplos sensores (de cor, refletância, ultrassônico, giroscópio e sistemas por eletro condução). O reconhecimento do tipo de sensor se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: Parâmetros vazios: sensor giroscópio. 1 pino: sensor de luz / refletância ou sensor de condução. 2 pinos: sensor ultrassônico. 5 pinos: sensor de cor.
+Este é o construtor da classe Sensor, que tem a função de realizar o controle de múltiplos sensores (de cor, refletância, ultrassônico, giroscópio e sistemas por eletro condução). 
 
-#### Leitura
+O reconhecimento do tipo de sensor se dá pela quantidade de pinos que são passados ao construtor, desta forma temos: Parâmetros vazios: sensor giroscópio. 
+
+- 1 pino: sensor de luz / refletância ou sensor de condução.
+- 2 pinos: sensor ultrassônico. 
+- 5 pinos: sensor de cor.
+
+### Leitura
 
 ```cpp
 "nomeObjeto"."tipoSensor"();
 ```
 
-Este método da função Sensor tem como função a leitura dos sensores, basta colocar o nome do objeto e seguido de seu “tipo”, podendo ser do tipo:
+Este método da função Sensor tem como função a leitura dos sensores, basta colocar o nome do objeto e seguido de seu "tipo", podendo ser do tipo:
 
-luz => para sensores de refletância.
-cor => para sensores de cor.
-conducao => para sistemas por condução elétrico.
-distancia => para sensor ultrassônico.
-posição => para sensor giroscópio.
+### Sensores de Refletância
 
-Todos, com exceção do sensor de “posicao”, dispensam o uso de parâmetros. Para utilizar este sensor é necessário informar o eixo do sensor a ser lido sendo representado pela letra inicial do sensor, A ou G, seguido de seu eixo x, y ou z, sendo assim:
+#### `int luz()`
 
-Ax = acelerômetro eixo x.
-Ay = acelerômetro eixo y.
-Az = acelerômetro eixo z.
-temp = sensor de temperatura.
-Gx = giroscópio eixo x.
-Gy = giroscópio eixo y.
-Gz = giroscópio eixo z.
+O método `luz()` retorna um valor do tipo inteiro lido por um sensor de refltância.
+
+```cpp
+meuSensorInfravermelho.luz();
+```
+
+### Sensores de Cor
+
+#### `int cor()`
+
+O método `cor()` retorna um valor do tipo inteiro lido por um sensor de cor/luminosidade.
+
+```cpp
+meuSensorDeCor.cor();
+```
+
+### Sensores Ultrassônicos
+
+#### `float distancia()`
+
+O método `distancia()` retorna um valor do tipo real lido por um sensor ultrassônico, indicando a distância até um obstáculo em centímetros.
+
+```cpp
+meuUltrassonico.distancia();
+```
+
+### Acelerômetros e Giroscópios
+
+
+Todos, com exceção do sensor de "posicao", dispensam o uso de parâmetros. Para utilizar este sensor é necessário informar o eixo do sensor a ser lido sendo representado pela letra inicial do sensor, A ou G, seguido de seu eixo x, y ou z, sendo assim:
+
+- Ax = acelerômetro eixo x.
+- Ay = acelerômetro eixo y.
+- Az = acelerômetro eixo z.
+- temp = sensor de temperatura.
+- Gx = giroscópio eixo x.
+- Gy = giroscópio eixo y.
+- Gz = giroscópio eixo z.
 
 ## LED
 
@@ -139,7 +171,7 @@ Led meuLed(3);
 
 > Este mesmo construtor pode ser utilizado por outros componentes que utilizem apenas um pino digital, como um buzzer, por exemplo.
 
-### `void liga([float ms])`
+#### `void liga([float ms])`
 
 O exemplo abaixo liga `meuLed` e aguarda 500 milissegundos.
 
@@ -153,7 +185,7 @@ meuLed.liga(500);
 meuLed.liga();
 ```
 
-### `void desliga([float ms])`
+#### `void desliga([float ms])`
 
 O exemplo abaixo desliga `meuLed` e aguarda 500 milissegundos.
 
