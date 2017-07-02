@@ -147,13 +147,25 @@ O exemplo abaixo liga `meuLed` e aguarda 500 milissegundos.
 meuLed.liga(500);
 ```
 
-É possível utilizar esta mesma função sem um tempo de espera. Ex.:
+É possível utilizar este mesmo método sem um tempo de espera. Ex.:
 
 ```cpp
 meuLed.liga();
 ```
 
-### desliga(float milissegundos)
+### desliga([float ms])
+
+O exemplo abaixo desliga `meuLed` e aguarda 500 milissegundos.
+
+```cpp
+meuLed.desliga(500);
+```
+
+É possível utilizar este mesmo método sem um tempo de espera. Ex.:
+
+```cpp
+meuLed.desliga();
+```
 
 ## Aprendendo
 
