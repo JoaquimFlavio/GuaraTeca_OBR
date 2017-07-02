@@ -158,23 +158,39 @@ sensorUltrassonico.distancia();
 
 ### Acelerômetros e Giroscópios
 
-```cpp
-acelerometro.acelerometroX();
-```
-
+#### `int giroscopioX()`
+Retorna o valor do eixo X captado por um giroscópio.
 ```cpp
 giroscopio.giroscopioX();
 ```
 
-Todos, com exceção do sensor de "posicao", dispensam o uso de parâmetros. Para utilizar este sensor é necessário informar o eixo do sensor a ser lido sendo representado pela letra inicial do sensor, A ou G, seguido de seu eixo x, y ou z, sendo assim:
+#### `int giroscopioY()`
+Retorna o valor do eixo Y captado por um giroscópio.
+```cpp
+giroscopio.giroscopioY();
+```
 
-- Ax = acelerômetro eixo x.
-- Ay = acelerômetro eixo y.
-- Az = acelerômetro eixo z.
-- temp = sensor de temperatura.
-- Gx = giroscópio eixo x.
-- Gy = giroscópio eixo y.
-- Gz = giroscópio eixo z.
+#### `int giroscopioZ()`
+Retorna o valor do eixo Z captado por um giroscópio.
+```cpp
+giroscopio.giroscopioZ();
+```
+
+#### `int acelerometroX()`
+Retorna o valor do eixo X captado por um acelerômetro.
+```cpp
+acelerometro.acelerometroX();
+```
+#### `int acelerometroY()`
+Retorna o valor do eixo Y captado por um acelerômetro.
+```cpp
+acelerometro.acelerometroY();
+```
+#### `int acelerometroZ()`
+Retorna o valor do eixo Z captado por um acelerômetro.
+```cpp
+acelerometro.acelerometroZ();
+```
 
 ## LEDs
 ```cpp
