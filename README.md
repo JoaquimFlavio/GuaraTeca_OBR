@@ -159,37 +159,37 @@ sensorUltrassonico.distancia();
 ### Acelerômetros e Giroscópios
 
 #### `int giroscopioX()`
-Retorna o valor do eixo X captado por um giroscópio.
+Retorna o valor do eixo X captado por um giroscópio. Ex.:
 ```cpp
-giroscopio.giroscopioX();
+meuGiroscopio.giroscopioX();
 ```
 
 #### `int giroscopioY()`
-Retorna o valor do eixo Y captado por um giroscópio.
+Retorna o valor do eixo Y captado por um giroscópio. Ex.:
 ```cpp
-giroscopio.giroscopioY();
+meuGiroscopio.giroscopioY();
 ```
 
 #### `int giroscopioZ()`
-Retorna o valor do eixo Z captado por um giroscópio.
+Retorna o valor do eixo Z captado por um giroscópio. Ex.:
 ```cpp
-giroscopio.giroscopioZ();
+meuGiroscopio.giroscopioZ();
 ```
 
 #### `int acelerometroX()`
-Retorna o valor do eixo X captado por um acelerômetro.
+Retorna o valor do eixo X captado por um acelerômetro. Ex.:
 ```cpp
-acelerometro.acelerometroX();
+meuAcelerometro.acelerometroX();
 ```
 #### `int acelerometroY()`
-Retorna o valor do eixo Y captado por um acelerômetro.
+Retorna o valor do eixo Y captado por um acelerômetro. Ex.:
 ```cpp
-acelerometro.acelerometroY();
+meuAcelerometro.acelerometroY();
 ```
 #### `int acelerometroZ()`
-Retorna o valor do eixo Z captado por um acelerômetro.
+Retorna o valor do eixo Z captado por um acelerômetro. Ex.:
 ```cpp
-acelerometro.acelerometroZ();
+meuAcelerometro.acelerometroZ();
 ```
 
 ## LEDs
