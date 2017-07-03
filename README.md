@@ -158,7 +158,8 @@ sensorUltrassonico.distancia();
 
 ### Acelerômetros e Giroscópios
 
-#### `int giroscopioX()`
+#### int giroscopioX()
+
 Retorna o valor do eixo X captado por um giroscópio. Ex.:
 ```cpp
 meuGiroscopio.giroscopioX();
