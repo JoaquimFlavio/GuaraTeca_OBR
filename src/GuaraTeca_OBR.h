@@ -124,35 +124,10 @@ class Sensor : public SensorRefletancia, public TCS230, public HCSR04, public GY
 class Led{
     public:
         Led(uint8_t pin_adquiri);//Construtor da classe Lec.
-        void liga   (float temp = 0);//Metodo para ligar o led durante x milisegundos.
-        void desliga(float temp = 0);//Metodo para desligar o led durante x milisegundos.
+        void liga   ();//Metodo para ligar o led.
+        void desliga();//Metodo para desligar o led.
     private:
         uint8_t pino;//Atributo de conexao do led.
 };
 
 #endif
-
-//-------------------------------------------------------------------------------------
-/*class Garra : public PonteH, public MotorShield{
-    public:
-        Garra(int pinoMotor0, int pinoMotor1, int pinoVelocidadeMotor1, int pinoMotor2, int pinoMotor3, int pinoVelocidadeMotor2);
-        void trava();
-        void abre(float temp, int velocidade);
-        void fecha(float temp, int velocidade);
-        void levanta(float temp, int velocidade);
-        void abaixa(float tmep, int velocidade);
-        void AGARRA(float temp1, float temp2, int velocidade);
-        void SOLTA(float temp1, float temp2, int velocidade);
-        int detecta();
-    private:
-        int i;
-        int criacaoObjectSensors = 1;;
-        int pino1, pino2;
-        char defaltTipoControlodar[6];
-        char defaltTipoSensor[10];
-        int GarraMotorPorts[5];
-        char str1[10], str2[10];
-        char OPT1[10], OPT2[10], OPT3[10], OPT4[10], OPT5[10];
-};
-*/
-//-------------------------------------------------------------------------------------
