@@ -18,37 +18,36 @@
 #ifndef GuaraTeca_OBR_H
 #define GuaraTeca_OBR_H
 
-    #define Control_MotorShield           Ativada
-    #define Control_PonteH                Ativada
-    #define Control_Sensor_HCSR04         Ativada
-    #define Control_Sensor_GY521_MPU6050  Ativada
-    #define Control_SensorRefletancia     Ativada
-    #define Control_Senso_TCS230          Ativada
-    #define Control_Servo                 Ativada
-
 #include <GuaraTeca_includes.h>
+#include <GuaraTeca_Hardware.h>
 
 //-------------------------------------------------------------------------------------
 class MRobot : public MotorShield{
     public:
-        MRobot(uint8_t conexao1, uint8_t conexao2, int velocidade = 100);//Construtor da classe MRobot, para 2 motores.
-        MRobot(uint8_t conexao1, uint8_t conexao2, uint8_t conexao3, uint8_t conexao4, int velocidade = 100);//Construtor da classe MRobot, para 4 motores, os dois primeiro trabalharam em paralelo.
+        MRobot(uint8_t conexao1, uint8_t conexao2, float velocidade = 100);//Construtor da classe MRobot, para 2 motores.
+        MRobot(uint8_t conexao1, uint8_t conexao2, uint8_t conexao3, uint8_t conexao4, float velocidade = 100);//Construtor da classe MRobot, para 4 motores, os dois primeiro trabalharam em paralelo.
+        
         //Corespondencia de pinos: motor esquerdo, motor direito, velocidade(0~100).                                          
         void frente     (float tempo = 0);//Metodo para mover o robo para frente   , durante "x" segundos.
         void tras       (float tempo = 0);//Metodo para mover o robo para tras     , durante "x" segundos.
         void esquerda   (float tempo = 0);//Metodo para mover o robo para esquerda , durante "x" segundos.
         void direita    (float tempo = 0);//Metodo para mover o robo para direita  , durante "x" segundos.
         void para       (float tempo = 0);//Metodo para travar movimentacao do robo, durante "x" segundos.
+            
+        //VME => velocidade do motor esquerdo.
+        //VMD => velocidade do motor direto.
+        void move (float VME, float VMD, float tempo = 0);//Metodo para movimentar o robo de acordo com as forças informadas (mais para a direita ou esquerda...), durante "x" segundos.
 
-        void defineVelocidade   (int tempV1, int tempV2);//Metodo "set" de velocidade da classe.
-        int adquireVelocidade (uint8_t OP);//Metodo "get" de velocidade da classe.
+        void defineVelocidade (float VME, float VMD);//Metodo "set" de velocidade da classe.
+        float adquireVME (void);//Metodo "get" de velocidade da classe.
+        float adquireVMD (void);//Metodo "get" de velocidade da classe.
     private:
-        int V1, V2;//Atributos de velocidade da classe.
+        float VME, VMD;//Atributos de velocidade da classe.
         uint8_t conexao1, conexao2, conexao3, conexao4;//Atributos de conexoes da classe.
         bool adicaoMotors;//atributo que controla a quantidade de motores: "2" ou "4".
 };
 
-class HRobot : public PonteH{
+class HRobot{
     public:
         HRobot(uint8_t P1A, uint8_t P2A, uint8_t VA, uint8_t P1B, uint8_t P2B, uint8_t VB, int velocidade = 100);//Construtor da classe HRobot.
         //Corespondencia de pinos:
@@ -65,11 +64,16 @@ class HRobot : public PonteH{
         void direita    (float tempo = 0);//Metodo para mover o robo para direita  , durante "x" segundos.
         void para       (float tempo = 0);//Metodo para travar movimentacao do robo, durante "x" segundos.
 
-        void defineVelocidade   (int tempV1, int tempV2);//Metodo "set" de velocidade da classe.
-        int adquireVelocidade (uint8_t OP);//Metodo "get" de velocidade da classe.
+        //VME => velocidade do motor esquerdo.
+        //VMD => velocidade do motor direto.
+        void move (float VME, float VMD, float tempo = 0);//Metodo para movimentar o robo de acordo com as forças informadas (mais para a direita ou esquerda...), durante "x" segundos.
+
+        void defineVelocidade (float VME, float VMD);//Metodo "set" de velocidade da classe.
+        float adquireVME (void);//Metodo "get" de velocidade da classe.
+        float adquireVMD (void);//Metodo "get" de velocidade da classe.
     private:
         uint8_t motor[6];//Atributos de conexoes da classe.
-        int V1, V2;//Atributos de velocidade da classe.
+        int VME, VMD;//Atributos de velocidade da classe.
 };
 
 void execute_durante(float tempo);//Funcao para converter o delay de milisegundos para segundos.
@@ -87,10 +91,10 @@ void execute_durante(float tempo);//Funcao para converter o delay de milisegundo
 #define Endereco_1 0x68//Endereco i2C do 1° sensor Giroscopio.
 #define Endereco_2 0x69//Endereco i2C do 2° sensor Giroscopio.
 
-#define frequenciaRecomendada_GUARABOTS 2//Melhor frequencia de operacao constatada.
-#define filtroCorRecomendada_GUARABOTS  'G'//Melhor filtro de cor constatada.
+#define frequenciaRecomendada_GUARABOTS 2
+#define filtroCorRecomendada_GUARABOTS 'G'
 
-class Sensor : public SensorRefletancia, public TCS230, public HCSR04, public GY521_MPU6050 {
+class Sensor{
     public:
         Sensor();//Construtor da classe Sensor, para sensor Giroscopio (GY521_MPU6050).
         Sensor(uint8_t PinSense1);//Construtor da classe Sensor, para sensor de refletancia.
@@ -100,9 +104,11 @@ class Sensor : public SensorRefletancia, public TCS230, public HCSR04, public GY
         void inicia(bool add = 0x00);//Metodo para iniciar o sensor Giroscopio.
 
         int luz(void);//Metodo de leitura do sensor de refletancia.
+        
         int cor(void);//Metodo de leitura do sensor de cor.
             void cor_frequencia(uint8_t OP);//Metodo para alterar a frequencia de operacao do sensor de cor.
             void cor_filtro(char RGB);//Metodo para selecao de filtro de luz do sensor de cor.
+        
         float distancia(void);//Metodo de leitura do sensor ultrassonico.
 
         int acelerometroX   ();//Metodo de leitura do sensor Acelerometro, eixo X.
