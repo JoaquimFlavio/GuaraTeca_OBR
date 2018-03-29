@@ -347,7 +347,7 @@ Sensor::Sensor(uint8_t trigPin, uint8_t echoPin){
     PinSense1 = trigPin;
     PinSense2 = echoPin;
 
-    inicia_HCSR04(PinSense1, PinSense2);//Preparamos o hardware para controle.
+    inicia_Ultrassonico(PinSense1, PinSense2);//Preparamos o hardware para controle.
 }
 Sensor::Sensor(uint8_t outPin, uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3){
     PinSense1 = outPin;
@@ -394,7 +394,7 @@ int Sensor::cor(){
 
 //ultrasonico__________________________________________________________________
 float Sensor::distancia(){
-    return leitura_HCSR04(PinSense1, PinSense2);
+    return leitura_Ultrassonico(PinSense1, PinSense2);
 }
 
 //Giroscopio e Acelerometro____________________________________________________

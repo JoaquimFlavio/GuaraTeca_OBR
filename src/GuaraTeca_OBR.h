@@ -18,7 +18,7 @@
 #ifndef GuaraTeca_OBR_H
 #define GuaraTeca_OBR_H
 
-#include <GuaraTeca_includes.h>
+//Inclusao da biblioteca com todas as funcoes de controle de baixo nivel_______________________
 #include <GuaraTeca_Hardware.h>
 
 //-------------------------------------------------------------------------------------
