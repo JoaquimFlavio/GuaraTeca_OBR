@@ -101,15 +101,15 @@ class Sensor{
         Sensor(uint8_t trigPin, uint8_t echoPin);//Construtor da classe Sensor, para sensor ultrassonico(HCSR04).
         Sensor(uint8_t outPin, uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3);//Construtor da classe Sensor, para sensor de cor (TCS230).
 
-        void inicia(bool add = 0x00);//Metodo para iniciar o sensor Giroscopio.
-
         int luz(void);//Metodo de leitura do sensor de refletancia.
         
         int cor(void);//Metodo de leitura do sensor de cor.
             void cor_frequencia(uint8_t OP);//Metodo para alterar a frequencia de operacao do sensor de cor.
             void cor_filtro(char RGB);//Metodo para selecao de filtro de luz do sensor de cor.
         
-        float distancia(void);//Metodo de leitura do sensor ultrassonico.
+        int distancia(void);//Metodo de leitura do sensor ultrassonico.
+
+        void inicia(bool add = 0x00);//Metodo para iniciar o sensor Giroscopio.
 
         int acelerometroX   ();//Metodo de leitura do sensor Acelerometro, eixo X.
         int acelerometroY   ();//Metodo de leitura do sensor Acelerometro, eixo Y.
@@ -129,7 +129,7 @@ class Sensor{
 
 class Led{
     public:
-        Led(uint8_t pin_adquiri);//Construtor da classe Lec.
+        Led(uint8_t pino);//Construtor da classe Lec.
         void liga   ();//Metodo para ligar o led.
         void desliga();//Metodo para desligar o led.
     private:

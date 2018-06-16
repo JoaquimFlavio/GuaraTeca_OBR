@@ -22,8 +22,8 @@
 MRobot::MRobot(uint8_t conexao1, uint8_t conexao2, float velocidade) : MotorShield(){
     this->conexao1 = conexao1;//Motor esquerdo.
     this->conexao2 = conexao2;//Motor direito.
-    this->conexao3 = NULL;
-    this->conexao4 = NULL;
+    //this->conexao3 = NULL;
+    //this->conexao4 = NULL;
 
     //Correcão de possíveis erros de usuario.
     if(velocidade > 100){
@@ -393,7 +393,7 @@ int Sensor::cor(){
 }
 
 //ultrasonico__________________________________________________________________
-float Sensor::distancia(){
+int Sensor::distancia(){
     return leitura_Ultrassonico(PinSense1, PinSense2);
 }
 
@@ -434,14 +434,14 @@ int Sensor::temperatura(){
 
 //Led________________________________________________________________________________________________________________________________________________
 
-Led::Led(uint8_t pin_adquiri){
-    pino = pin_adquiri;
+Led::Led(uint8_t pino){
+    this->pino = pino;
     pinMode(pino, OUTPUT);
 }
 
 void Led::liga(){
-    digitalWrite(pino , HIGH);
+    digitalWrite(pino, HIGH);
 }
 void Led::desliga(){
-    digitalWrite(pino , LOW);
+    digitalWrite(pino, LOW);
 }

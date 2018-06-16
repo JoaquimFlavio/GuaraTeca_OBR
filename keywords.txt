@@ -21,7 +21,8 @@ direita	            KEYWORD2
 esquerda	        KEYWORD2
 para	            KEYWORD2
 defineVelocidade	KEYWORD2
-adquireVelocidade	KEYWORD2
+adquireVME      	KEYWORD2
+adquireVMD      	KEYWORD2
 
 luz	            KEYWORD2
 cor	            KEYWORD2
