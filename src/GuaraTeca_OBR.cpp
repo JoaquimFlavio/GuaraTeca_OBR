@@ -313,8 +313,8 @@ void HRobot::direita(float tempo){
     }
 }
 void HRobot::para(float tempo){
-    trava_PonteH(motor[0], motor[1]);
-    trava_PonteH(motor[3], motor[4]);
+    trava_PonteH(motor[0], motor[1], motor[2]);
+    trava_PonteH(motor[3], motor[4], motor[5]);
     if(tempo > 0){
         execute_durante(tempo);
         desliga_PonteH(motor[0], motor[1]);
