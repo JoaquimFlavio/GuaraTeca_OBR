@@ -6,10 +6,10 @@
 # Funções especiais (KEYWORD1)
 #######################################
 
-MRobot	KEYWORD1	MRobot
-HRobot	KEYWORD1	HRobot
-Sensor	KEYWORD1	Sensor
-Led	KEYWORD1	Led
+MRobot	KEYWORD1
+HRobot	KEYWORD1
+Sensor	KEYWORD1
+Led	KEYWORD1
 
 #######################################
 # Metodos e Funções (KEYWORD2)
