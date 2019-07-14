@@ -395,7 +395,7 @@ float HGRobot::adquireVMD(void){
 
 void HGRobot::frente(float tempo){
     sentido1_L9110(motor[0], motor[1], this->VME);
-    sentido1_L9110(motor[2], motor[2], this->VMD);
+    sentido1_L9110(motor[2], motor[3], this->VMD);
     if(tempo > 0){
         execute_durante(tempo);
         desliga_L9110(motor[0], motor[1]);
@@ -404,7 +404,7 @@ void HGRobot::frente(float tempo){
 }
 void HGRobot::tras(float tempo){
     sentido2_L9110(motor[0], motor[1], this->VME);
-    sentido2_L9110(motor[2], motor[2], this->VMD);
+    sentido2_L9110(motor[2], motor[3], this->VMD);
     if(tempo > 0){
         execute_durante(tempo);
         desliga_L9110(motor[0], motor[1]);
@@ -413,7 +413,7 @@ void HGRobot::tras(float tempo){
 }
 void HGRobot::esquerda(float tempo){
     sentido2_L9110(motor[0], motor[1], this->VME);
-    sentido1_L9110(motor[2], motor[2], this->VMD);
+    sentido1_L9110(motor[2], motor[3], this->VMD);
     if(tempo > 0){
         execute_durante(tempo);
         desliga_L9110(motor[0], motor[1]);
@@ -422,7 +422,7 @@ void HGRobot::esquerda(float tempo){
 }
 void HGRobot::direita(float tempo){
     sentido1_L9110(motor[0], motor[1], this->VME);
-    sentido2_L9110(motor[2], motor[2], this->VMD);
+    sentido2_L9110(motor[2], motor[3], this->VMD);
     if(tempo > 0){
         execute_durante(tempo);
         desliga_L9110(motor[0], motor[1]);
