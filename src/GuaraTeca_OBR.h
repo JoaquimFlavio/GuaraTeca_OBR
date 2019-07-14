@@ -76,7 +76,44 @@ class HRobot{
         int VME, VMD;//Atributos de velocidade da classe.
 };
 
+class HGRobot{
+    public:
+        HGRobot(uint8_t P1A, uint8_t P2A, uint8_t P1B, uint8_t P2B, int velocidade = 100);
+        /* 
+         * Corespondencia de pinos:
+         *      P1A -> pino de controle 1 do lado A da PonteH.
+         *      P2A -> pino de controle 2 do lado A da PonteH.
+         *      P1B -> pino de controle 1 do lado B da PonteH.
+         *      P2B -> pino de controle 2 do lado B da PonteH.
+         *      velocidade -> 0~100.
+         */
+        
+        void frente   (float tempo = 0);//Metodo para mover o robo para frente   , durante "x" segundos.
+        void tras     (float tempo = 0);//Metodo para mover o robo para tras     , durante "x" segundos.
+        void esquerda (float tempo = 0);//Metodo para mover o robo para esquerda , durante "x" segundos.
+        void direita  (float tempo = 0);//Metodo para mover o robo para direita  , durante "x" segundos.
+        void para     (float tempo = 0);//Metodo para travar movimentacao do robo, durante "x" segundos.
+
+        //VME => velocidade do motor esquerdo.
+        //VMD => velocidade do motor direito.
+        void move (float VME, float VMD, float tempo = 0);//Metodo para movimentar o robo de acordo com as forças informadas (mais para a direita ou esquerda...), durante "x" segundos.
+
+        //Metodo "set" de velocidade da classe.
+        void defineVRobot  (float VME, float VMD);
+        void defineVME (float VME);
+        void defineVMD (float VMD);
+
+        //Metodo "get" de velocidade da classe.
+        float adquireVME (void);
+        float adquireVMD (void);
+    private:
+        uint8_t motor[4];//Atributos de conexoes da classe.
+        int VME, VMD;//Atributos de velocidade da classe.
+};
+
 void execute_durante(float tempo);//Funcao para converter o delay de milisegundos para segundos.
+int velocidade_para_pwm(float velocidade);
+float pwm_para_velocidade(int velocidade);
 
 #define Ax 0//Acelerometro eixo X.
 #define Ay 1//Acelerometro eixo Y.

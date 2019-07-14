@@ -229,10 +229,11 @@ HRobot::HRobot(uint8_t P1A, uint8_t P2A, uint8_t VA, uint8_t P1B, uint8_t P2B, u
     motor[5] = VB;//pino velocidade lado B da Ponte H           |       ||      .
 
     //Correcão de possíveis erros de usuario.
-    if(velocidade > 100)
+    if(velocidade > 100){
         velocidade = 100;
-    else if(velocidade < 100)
+    }else if(velocidade < 0){
         velocidade = 0;
+    }
 
     VME = VMD = (velocidade*255)/100;//Converção de "% de velocidade" para "nivel de tensao".
     
@@ -330,6 +331,133 @@ void HRobot::move(float VME, float VMD, float tempo){
     desliga_PonteH(motor[3], motor[4]);
 }
 
+//HG7881______________________________________________________________________________________________________________________________________
+HGRobot::HGRobot(uint8_t P1A, uint8_t P2A, uint8_t P1B, uint8_t P2B, int velocidade){
+    this->motor[0] = P1A;//pino de controle porta 1, lado A da PonteH | Motor esquerdo.
+    this->motor[1] = P2A;//pino de controle porta 2, lado A da PonteH |       ||      .
+    this->motor[2] = P1B;//pino de controle porta 1, lado B da PonteH | Motor direito .
+    this->motor[3] = P2B;//pino de controle porta 2, lado B da PonteH |       ||      .
+    
+    //Correcão de possíveis erros de usuario.
+    if(velocidade > 100){
+        velocidade = 100;
+    }else if(velocidade < 0){
+        velocidade = 0;
+    }
+
+    this->VME = this->VMD = velocidade_para_pwm(velocidade);
+    
+    //Prepara o arduino para permitir o controle dos motores.
+    iniciaL9110(this->motor[0], this->motor[1]);
+    iniciaL9110(this->motor[2], this->motor[3]);
+    
+    //Desliga os motores para "limpar" o drive.
+    desliga_L9110(this->motor[0], this->motor[1]);
+    desliga_L9110(this->motor[2], this->motor[3]);
+}
+void HGRobot::defineVRobot(float VME, float VMD){
+    //Correcão de possíveis erros de usuario.
+    if(VME > 100){
+        VME = 100;
+    }else if(VME < 0){
+        VME = 0;
+    }
+    if(VMD > 100){
+        VMD = 100;
+    }else if(VMD < 0){
+        VMD = 0;
+    }
+    
+    //Atualizamos as variaveis com a nova velocidade.
+    this->VME = velocidade_para_pwm(VME);
+    this->VMD = velocidade_para_pwm(VMD);
+
+    controleDeCorrente_PonteH(motor[2], this->VME);//Atualizamos a velocidade do lado A da Ponte H.
+    controleDeCorrente_PonteH(motor[5], this->VMD);//Atualizamos a velocidade do lado B da Ponte H.
+}
+float HGRobot::adquireVME(void){
+    return pwm_para_velocidade(this->VME);
+}
+float HGRobot::adquireVMD(void){
+    return pwm_para_velocidade(this->VMD);
+}
+
+/*
+    Os metodos: frente, tras, esquerda, direita, para, seguem um padrao:
+        ->Verifica se o usuario definiu um tempo de duracao para a movimentacao.
+        *Se estiver definido:
+            ->Congela o codigo durante o tempo definido.
+            ->Desliga a alimentacao dos motores.
+        *Senao:
+            ->Não Faz nada, apenas deixa o estado de movimentacao ativo, de modo
+              que a menos que o usuario o altere ele se mantera em movimento
+*/
+
+void HGRobot::frente(float tempo){
+    sentido1_L9110(motor[0], motor[1], this->VME);
+    sentido1_L9110(motor[2], motor[2], this->VMD);
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_L9110(motor[0], motor[1]);
+        desliga_L9110(motor[2], motor[3]);
+    }
+}
+void HGRobot::tras(float tempo){
+    sentido2_L9110(motor[0], motor[1], this->VME);
+    sentido2_L9110(motor[2], motor[2], this->VMD);
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_L9110(motor[0], motor[1]);
+        desliga_L9110(motor[2], motor[3]);
+    }
+}
+void HGRobot::esquerda(float tempo){
+    sentido2_L9110(motor[0], motor[1], this->VME);
+    sentido1_L9110(motor[2], motor[2], this->VMD);
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_L9110(motor[0], motor[1]);
+        desliga_L9110(motor[2], motor[3]);
+    }
+}
+void HGRobot::direita(float tempo){
+    sentido1_L9110(motor[0], motor[1], this->VME);
+    sentido2_L9110(motor[2], motor[2], this->VMD);
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_L9110(motor[0], motor[1]);
+        desliga_L9110(motor[2], motor[3]);
+    }
+}
+void HGRobot::para(float tempo){
+    trava_L9110(motor[0], motor[1]);
+    trava_L9110(motor[2], motor[3]);
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_L9110(motor[0], motor[1]);
+        desliga_L9110(motor[2], motor[3]);
+    }
+}
+void HGRobot::move(float VME, float VMD, float tempo){
+    VME = velocidade_para_pwm(VME);
+    VMD = velocidade_para_pwm(VMD);
+
+    VME > 0 ? sentido1_L9110(motor[0], motor[1], VME) : sentido2_L9110(motor[2], motor[3], VME);
+    VMD > 0 ? sentido1_L9110(motor[0], motor[1], VMD) : sentido2_L9110(motor[2], motor[3], VME);
+
+    if(tempo > 0){
+        execute_durante(tempo);
+        desliga_PonteH(motor[0], motor[1]);
+        desliga_PonteH(motor[2], motor[3]);
+    }
+}
+
+int velocidade_para_pwm(float velocidade){
+    return velocidade > 0 ? ((velocidade*255)/100) : (((velocidade*255)/100)*-1);//Converção de "% de velocidade" para "nivel de tensao".
+}
+float pwm_para_velocidade(int pwm){
+    return pwm > 0 ? ((pwm*100)/255) : (((pwm*100)/255)*-1);//Converção de "nivel de tensao" para "% de velocidade". 
+}
 void execute_durante(float tempo){
     delay(tempo*1000);
 }
